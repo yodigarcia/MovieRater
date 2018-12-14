@@ -1,37 +1,34 @@
 package com.example.yodigarcia.movierater
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.RadioButton
-import kotlinx.android.synthetic.main.movie_home.*
+import kotlinx.android.synthetic.main.movie_update.*
 
-class MovieHome : AppCompatActivity() {
-
+class MovieUpdate : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.movie_home)
+        setContentView(R.layout.movie_update)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
 
-        audienceCheck.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked)
-                checkbox.visibility = View.VISIBLE
-            else
-                checkbox.visibility = View.INVISIBLE
-        }
+        movieTitle.setText("Avengers")
+        movieDesc.setText("Movie about a lot of people hitting each other")
+        releaseDate.setText("2010")
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.home_menu, menu)
-
+        menuInflater.inflate(R.menu.update_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
-        if (item?.itemId == R.id.addMenu) {
+        if(item?.itemId == R.id.save) {
             val editTitle: String? = movieTitle.text.toString()
             val editDesc: String? = movieDesc.text.toString()
             val editRelDate: String? = releaseDate.text.toString()
@@ -65,21 +62,26 @@ class MovieHome : AppCompatActivity() {
                     if (languageChk.isChecked == true)
                         intent.putExtra("audience", "No (Language)")
 //
-                }
-                else {
+                } else {
                     intent.putExtra("audience", "Yes")
                 }
                 startActivity(intent)
             }
         }
 
-        if (item?.itemId == R.id.clearMenu) {
-            movieTitle.setText("")
-            movieDesc.setText("")
-            releaseDate.setText("")
-            language.check(R.id.english)
-            audienceCheck.isChecked = false
+        if(item?.itemId == R.id.cancel) {
+            val intent = Intent(this, MovieLanding::class.java)
+            startActivity(intent)
         }
+
+        if(item?.itemId == android.R.id.home) {
+            val intent = Intent(this, MovieLanding::class.java)
+            startActivity(intent)
+        }
+
+
         return super.onOptionsItemSelected(item)
     }
+
+
 }

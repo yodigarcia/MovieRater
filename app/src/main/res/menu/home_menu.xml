@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="Add"
+        android:id="@+id/addMenu"
+        app:showAsAction="always"/>
+
+    <item
+        android:title="Clear Entries"
+        android:id="@+id/clearMenu"
+        app:showAsAction="never"/>
+
+
+</menu>
